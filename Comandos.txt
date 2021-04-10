@@ -1,0 +1,112 @@
+----- Configurações
+
+//--global faz as configurações serem aplicados a todos os repositorios
+git config --global user.name "Denis Oliveira"
+git config --global user.email "denisb.oliveira@live.com"
+git config --global core.editor vim //Por padrão o editor é o vim
+
+git config user.name
+git config user.email
+git config core.editor
+git config --list //Mostra tudo
+
+----- Criar repositorio apartir do sistema
+
+git init
+
+----- Editar arquivo
+
+vim Readme.md //Cria arquivo Readme.md
+aperta i //Entra no modo insert onde pode-se digitar o texto
+aperta esc //Sai do modo insertS
+digita :wq //: é para iniciarlizar comando, w write, q quit, ou seja, salvar e sair
+digita :q //: é para iniciarlizar comando e q é quit, ou seja, sair
+vi Readme.md //Abre edição novamente
+
+----- Criar commit
+
+git status //Ve status dos arquivos na pasta
+git add
+git add . //Adiciona tudo ao stage(new file)
+git add nomeArquivo //Adiciona nomeArquivo ao stage(new file)
+
+git remove --cached -r -f . //Remove tudo do stage, -r recursivamente, -f força
+git remove --cached nomeArquivo //Remove nomeArquivo do stash
+
+git commit -m mensagem //Realiza o commit do stagecom uma mesagem, m mensagem
+git commit -am mensagem //Adiciona os arquivos modificados ao stagee realiza o commit com uma mesagem, m mensagem
+
+----- Depois do commit
+
+git log //Mostra commits realizados
+git log --author="Denis"//Filtra log para commits onde o autor possui o texto como parte do nome do autor
+git shortlog //Mostra commits enviados agrupados por autor
+git shortlog -sn //Mostra quantidade de commits de cada autor
+git log --graph //Mostra commits de forma gráfica evidenciando branches
+
+git show cod //Mostra o que foi feito em determinado commit. O codigo do commit pode ser encontrado nos comandos de log
+
+git diff //Mostra a diferença entre o stagee o último commit
+git diff cod1 cod2 //Mostra a diferença entre 2 commits
+
+----- Desfazendo coisas
+
+git checkout nomeArquivo //Retorna o arquivo para seu status no último commit, desfazendo modificações
+
+git reset --soft cod //Desfaz somente os commits acima de cod, porém mantem todas as modificações são adicionadas no stage, prontas para um novo commit
+git reset --mixed cod //Desfaz somente os commits acima de cod, porém mantem todas as modificações não adicionadas no stage
+git reset --hard cod //Desfaz somente os commits acima de cod e delete permanentemente todas as modificações que foram desfeitas
+
+----- Conectar com repositorio online 
+
+git remote add origin https://github.com/DenisOliveira1/teste.git //Cadastra o repositorio com o nome origin online para essa pasta
+git push -u origin master //Envia os arquivos pela primeira vez para a branch master do repositorio online origin
+git pull origin master //Baixa arquivos da branch master do repositorio remoto origin
+git remote //Lista repositorios remotos cadastrados
+
+----- Enviar dados para repositorio online 	
+
+git commit -am mensagem //Adiciona os arquivos modificados ao stagee realiza o commit com uma mesagem, m mensagem
+git push origin master // Envie stagepara para a branch master do repositorio online origin
+
+----- Clonar repositorio online para a maquina	
+
+git clone https://github.com/DenisOliveira1/teste meuTeste // Clona repositorio online para a maquina
+
+----- Branches
+
+git branch //Mostra as branches do projeto, * marca a branch atual
+git checkout -b teste //Cria nova branch e entra nela
+git checkout teste //Entra na outra branch
+git push origin :teste //Apaga branch no repositorio remoto
+git tag -d teste//Apaga branch no repositorio local
+
+----- Merge / Rebase
+
+git merge outraBranch //Cria um novo commit fazendo o merge entre o último commit na branch atual e o último commit da branch informada. O novo commit ficará na branch atual
+
+git rebase outraBranch //Traz os commits da branch informada para o head da branch atual. Fica linear como se não houvesse uma branch depois
+
+----- Stash
+
+git stash //Guarda status atual em na memoria
+git stash list//Mostra os stashes salvos
+git stash clear //Apaga os stashes salvos
+git stash apply 0 //Traz as mudanças do stash indicado para o status atual
+
+----- Alias
+
+git config --global alias.s status//Define atalhos para os comandos onde s é o atalho e  status seria o comando a ser atribuido a ele, formando o atalho git s
+
+----- Tags
+
+git tag -a 1.0.0 -m "Finalizado"//Cria uma tag de versionamento
+git push origin master --tags //Envia tags para o repositorio remoto
+git tag //Lista de tags geradas até então
+git push origin :1.0.0 //Apaga tag no repositorio remoto
+git tag -d 1.0.0 //Apaga tag no repositorio local
+
+----- Revert
+
+git revert HEAD~3 //Desfaz os x últimos commits
+ 
